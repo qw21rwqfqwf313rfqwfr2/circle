@@ -262,6 +262,17 @@
             bottom: 12px;
             right: 20px;
         }
+
+        /* Chart rotation animation */
+        @keyframes rotateChart {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        #chart.rotating {
+            animation: rotateChart 30s linear infinite;
+            transform-origin: center center;
+        }
     </style>
 </head>
 
@@ -508,6 +519,7 @@
             const music = document.getElementById('music');
             const discoBallContainer = document.getElementById('discoBallContainer');
             const laserContainer = document.getElementById('laserContainer');
+            const chartElement = document.getElementById('chart');
             const body = document.body;
             
             if (!partyMode) {
@@ -521,6 +533,9 @@
                 discoBallContainer.classList.add('active');
                 laserContainer.classList.add('active');
                 setupDiscoBall();
+                
+                // Start chart rotation
+                chartElement.classList.add('rotating');
                 
                 // Start music from 28 seconds
                 music.currentTime = 28;
@@ -541,6 +556,9 @@
                 // Hide disco ball and lasers
                 discoBallContainer.classList.remove('active');
                 laserContainer.classList.remove('active');
+                
+                // Stop chart rotation
+                chartElement.classList.remove('rotating');
                 
                 // Stop music
                 music.pause();
